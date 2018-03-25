@@ -7,10 +7,10 @@
 例如按下面这样写，然后添加设置：caps_f7=keyFunc_test2(apple)
 3. 保存，重载 capslock+ (capslock+F5)
 4. 按下 capslock+F7 试试
-************************************************/
+*/
 
-
-keyfunc_test2(str){
-  msgbox, % str
+; 各种IDE的删除行
+selfKeyFunc_DeleteLine(){
+  SendInput, ^{d}
   return
 }

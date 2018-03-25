@@ -36,6 +36,7 @@
             return
         }
 
+        ; 空
         keyFunc_g(){
             return
         }
@@ -86,7 +87,7 @@
         }
 
         keyFunc_q(){
-            funcLogic_OpenTranslate()
+            funcLogic_OpenTranslatePanel()
             return
         }
 
@@ -101,6 +102,7 @@
         }
 
         keyFunc_t(){
+            funcLogic_translateWithClipboard()
             return
         }
 
@@ -165,14 +167,17 @@
         }
 
         keyFunc_f7(){
+            funcLogic_MonitorProgressChange()
             return
         }
 
         keyFunc_f8(){
+            CreateKeysFile()
             return
         }
 
         keyFunc_f9(){
+            funcLogic_getMousePosWinTitle()
             return
         }
 
@@ -250,7 +255,7 @@
 
     ; =========   其他符号 ... Start
     {
-        keyFunc_backuote(){
+        keyFunc_backquote(){
             funcLogic_winbind_activate(9)
             return
         }
@@ -314,7 +319,15 @@
         }
 
         keyFunc_space(){
-            funcLogic_tab()
+            global
+            IfWinExist, ahk_id %transGuiHwnd%
+            {
+                funcLogic_clearTranslatePanel()
+            }
+            else
+            {
+                funcLogic_tab()
+            }
             return
         }
     }
@@ -589,7 +602,7 @@
 
     ; =========   其他符号 ... Start
     {
-        keyFunc_alt_backuote(){
+        keyFunc_alt_backquote(){
             funcLogic_winbind_binding(9)
             return
         }
@@ -916,7 +929,7 @@
     ; =========   其他符号 ... Start
     {
 
-        keyFunc_shift_backuote(){
+        keyFunc_shift_backquote(){
             return
         }
 
@@ -1222,7 +1235,7 @@
 
     ; =========   其他符号 ... Start
     {
-        keyFunc_ctrl_backuote(){
+        keyFunc_ctrl_backquote(){
             return
         }
 

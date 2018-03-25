@@ -17,6 +17,10 @@ settingsInit:
 global settingsModifyTime ;设置文件的修改时间
 global CLSets:={} ;保存Capslock+settings.ini的各种设置
 CLSets.length:={} ;保存settings.ini中每个字段的关键词数量
+
+global CKeys:={} ;保存AllKeys的各种设置
+global CurPID:=0 ; 当前的进程ID
+
 global setsChanges:={} ;保存哪些设置经过改变
 ;set.ini 里面所有字段名，有更新必须修改这里，否则会无法获取
 global iniSections:=["Global","QSearch","QRun","QWeb","TabHotString","QStyle","TTranslate","Keys","Dict"]
@@ -65,6 +69,7 @@ for key,sectionValue in iniSections
     setsChanges[sectionValue].appended:={}
     settingsSectionInit(sectionValue)
 }
+
 gosub, keysInit
 SetTimer, globalSettings, -1
 SetTimer, setShortcutKey, -1
@@ -155,7 +160,7 @@ settingsSectionInit(sectionValue)
         for key,keyValue in keyArr
         {
             IniRead, setValue, CapsLock+settings.ini, %sectionValue%, %keyValue%, %A_Space%
-            
+
             if sectionValue in QSearch,QRun,QWeb  ;如果是这些里面的，用对象来保存，否则直接key=value
             {
                 shortKey:=getShortSetKey(keyValue)    ;从 abc(xxx) 中提取出 abc，用来作关键字

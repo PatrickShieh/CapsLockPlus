@@ -159,8 +159,8 @@ global keyset:=CLSets.Keys
     {
         ; 反引号( ` )
         if(!keyset.caps_backquote)
-            keyset.caps_backquote:="keyFunc_backuote"
-
+            keyset.caps_backquote:="keyFunc_backquote"
+            
         ; 减号( - )
         if(!keyset.caps_minus)
             keyset.caps_minus:="keyFunc_minus"
@@ -422,7 +422,7 @@ global keyset:=CLSets.Keys
 
         ; 反引号( ` )
         if(!keyset.caps_alt_backquote)
-            keyset.caps_alt_backquote:="keyFunc_alt_backuote"
+            keyset.caps_alt_backquote:="keyFunc_alt_backquote"
 
         ; 减号( - )
         if(!keyset.caps_alt_minus)
@@ -683,7 +683,7 @@ global keyset:=CLSets.Keys
     {
         ; 反引号( ` )
         if(!keyset.caps_shift_backquote)
-            keyset.caps_shift_backquote:="keyFunc_shift_backuote"
+            keyset.caps_shift_backquote:="keyFunc_shift_backquote"
 
         ; 减号( - )
         if(!keyset.caps_shift_minus)
@@ -941,7 +941,7 @@ global keyset:=CLSets.Keys
     {
         ; 反引号( ` )
         if(!keyset.caps_ctrl_backquote)
-            keyset.caps_ctrl_backquote:="keyFunc_ctrl_backuote"
+            keyset.caps_ctrl_backquote:="keyFunc_ctrl_backquote"
 
         ; 减号( - )
         if(!keyset.caps_ctrl_minus)

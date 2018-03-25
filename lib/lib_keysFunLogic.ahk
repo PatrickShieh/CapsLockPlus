@@ -391,18 +391,44 @@ funcLogic_volumeDown(){
     return
 }
 
+funcLogic_OpenTranslatePanel(){
+    openydTranslatePanel()
+    return
+}
+
+; 翻译剪切板里的内容
+funcLogic_translateWithClipboard(){
+    global
+    selText:=getSelText()
+    if(selText)
+    { 
+        ydTranslate(selText)
+    }
+    else
+    { 
+        ClipboardOld:=ClipboardAll
+        Clipboard:=""
+        SendInput, ^{Left}^+{Right}^{insert}
+        ClipWait, 0.05
+        selText:=Clipboard
+        ydTranslate(selText)
+        Clipboard:=ClipboardOld
+    }
+
+    Return
+}
+
+
+funcLogic_getMousePosWinTitle(){
+    GetMousePosWinTitle()
+    return
+}
+
 ; 清空翻译界面
 funcLogic_clearTranslatePanel(){
-    ; global
-    ; MsgBoxStr:=""
-    ; DetectHiddenWindows, On ;可以检测到隐藏窗口
-    ; WinGet, ifGuiExistButHide, Count, ahk_id %transGuiHwnd%
-    ; if(ifGuiExistButHide)
-    ; {
-    ;     ControlSetText, , %MsgBoxStr%, ahk_id %transEditHwnd%
-    ;     ControlFocus, , ahk_id %transEditHwnd%
-    ;     WinShow, ahk_id %transGuiHwnd%
-    ; }
+    ControlSetText, , %MsgBoxStr%, ahk_id %transEditHwnd%
+    ControlFocus, , ahk_id %transEditHwnd%
+    WinShow, ahk_id %transGuiHwnd%
     return
 }
 
@@ -709,5 +735,23 @@ funcLogic_pasteSystem(){
         whichClipboardNow:=0
     }
     SendInput, ^{v}
+    return
+}
+
+; 打开火萤主窗口
+funcLogic_HuoYingManScreen(){
+    SendInput, ^!+{left}
+    return
+}
+
+; 打开火萤副窗口
+funcLogic_HuoYingSecondaryScreen(){
+    SendInput, ^!+{right}
+    return
+}
+
+; 监听当前激活的窗口是否改变，是则更换对应当前窗口的热键
+funcLogic_MonitorProgressChange(){
+    MonitorProgressChange()
     return
 }

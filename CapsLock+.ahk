@@ -1,8 +1,8 @@
-﻿if not A_IsAdmin ;running by administrator
-{
-   Run *RunAs "%A_ScriptFullPath%" 
-   ExitApp
-}
+﻿; if not A_IsAdmin ;running by administrator
+; {
+;    Run *RunAs "%A_ScriptFullPath%" 
+;    ExitApp
+; }
 
 
 IfExist, capslock+icon.ico
@@ -34,13 +34,14 @@ allowRunOnClipboardChange:=true
 ;  #include ..\language\English.ahk
 ; /language
 
+#include lib_settings.ahk ;get the settings from capslock+settings.ini 
 #include lib_keysFunction.ahk
 #include lib_keysSet.ahk
 ;  #include lib_ahkExec.ahk
 ;  #include lib_scriptDemo.ahk
 ;  #include lib_fileMethods.ahk
 
-#include lib_settings.ahk ;get the settings from capslock+settings.ini 
+
 #Include lib_clQ.ahk ;capslock+Q
 #Include lib_ydTrans.ahk  ;capslock+T translate
 #Include lib_clTab.ahk 
@@ -82,10 +83,7 @@ KeyWait, Capslock
 CapsLock:="" ;Capslock最优先置空，来关闭 Capslock+ 功能的触发
 if CapsLock2
 {
-    if(CapsLockOpen)
-    {
-        SetCapsLockState, % GetKeyState("CapsLock","T") ? "Off" : "On"
-    }
+    SetCapsLockState, % GetKeyState("CapsLock","T") ? "Off" : "On"
 }
 CapsLock2:=""
 
@@ -187,7 +185,7 @@ return
     {
         `::
         try
-            runFunc(keyset.caps_backQuote)
+            runFunc(keyset.caps_backquote)
         Capslock2:=""
         return
 
@@ -380,7 +378,7 @@ return
     {
         !`::
         try
-            runFunc(keyset.caps_alt_backQuote)
+            runFunc(keyset.caps_alt_backquote)
         Capslock2:=""
         return
 
@@ -573,7 +571,7 @@ return
     {
         +`::
         try
-            runFunc(keyset.caps_shift_backQuote)
+            runFunc(keyset.caps_shift_backquote)
         Capslock2:=""
         return
 
@@ -767,7 +765,7 @@ return
     {
         ^`::
         try
-            runFunc(keyset.caps_ctrl_backQuote)
+            runFunc(keyset.caps_ctrl_backquote)
         Capslock2:=""
         return
 

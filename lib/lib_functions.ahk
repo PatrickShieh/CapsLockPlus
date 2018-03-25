@@ -390,16 +390,16 @@ ActiveMiniDict(){
 }
 
 GetMousePosWinTitle(){
-    MouseGetPos, xpos, ypos 
-    Msgbox, The cursor is at X%xpos% Y%ypos%. 
+    ; MouseGetPos, xpos, ypos 
+    ; Msgbox, The cursor is at X%xpos% Y%ypos%. 
     
     ; 这里例子允许您移动鼠标来查看
     ; 鼠标悬停窗口的标题:
-    #Persistent
-    SetTimer, WatchCursor, 100
-    return
+    ; #Persistent
+    ; SetTimer, WatchCursor, 100
+    ; return
     
-    WatchCursor:
+    ; WatchCursor:
     MouseGetPos, , , id, control
     WinGetTitle, title, ahk_id %id%
     WinGetClass, class, ahk_id %id%
@@ -438,12 +438,11 @@ SwitchSelCase(Mode) {
 	Clipboard := clipBak ; 恢复剪贴板
 }
 
-; 加载大小写键的状态
-LoadCapslockStatus(){
+; 重新加载CapsLock+settings.ini里的Keys键
+ReloadKeysSet(){
     global
-    SetCapsLockState, CapslockOpen ? "On" : "Off"
-    if(!CapslockOpen)
-        SetCapsLockState, Off
+    settingsModifyTime := -1
+    Gosub, monitorSettingsFile
     return
 }
 
@@ -507,5 +506,135 @@ ChangeWindowRight(){
 ; 将当前屏幕的窗口移动到另外一个屏幕
 PutTheWindowToOtherScreen(){
     SendInput, +#{Right}
+}
 
+; 监听当前激活的窗口是否改变，是则更换对应当前窗口的热键
+MonitorProgressChange(){
+    #Persistent
+    SetTimer, OnPidChange, 250
+    return
+
+    ; 当进程ID改变时
+    ; 如果CKeys的键值里有当前的PID，则重新对CLSets.Keys进行赋值
+    OnPidChange:
+    {
+        curActiceWinID := WinExist("A")
+        WinGet, tmpPid, PID, ahk_id %curActiceWinID% 
+
+        if(tmpPid > 0 && tmpPid != CurPID)
+        {
+            CurPID := tmpPid
+            if(CKeys[CurPID] != null && CLSets.Keys != null)
+            {
+                For key, value in CKeys[CurPID]
+                {
+                    if(CLSets.Keys[key])
+                    {
+                        CLSets.Keys[key] := value
+                    }
+                }
+            }
+        }
+        return
+    }
+}
+
+; 根据当前窗口创建Keys配置文件
+CreateKeysFile()
+{
+    allKeysDirName := "AllKeys"
+    scriptPath:=A_ScriptDir . "\" . allKeysDirName
+
+    IfNotExist, %scriptPath%
+        FileCreateDir, %allKeysDirName%
+
+    curActiceWinID := WinExist("A") ;获取id
+
+    if(curActiceWinID)
+    {
+        ; 程序标题
+        WinGetTitle, curActiveWinTitle, ahk_id %curActiceWinID%
+        ColorArray := StrSplit(curActiveWinTitle, " - ")
+        progressName := null
+        if(colorArray.MaxIndex() > 1)
+        {
+            progressName := ColorArray[ColorArray.MaxIndex()]
+        }
+        else
+        {
+            progressName := curActiveWinTitle
+        }
+        progressName := progressName . ".ini"
+        progressPath := scriptPath . "\" . progressName
+
+        IfNotExist %progressPath%
+        {
+            ; 程序进程ID
+            WinGet, ProgressID, PID, ahk_id %curActiceWinID% 
+
+            fileTxt := "[FileInfos]`nProgressID=" . ProgressID . "`n`n[Keys]`n"
+
+            FileAppend, %fileTxt%, %progressPath%, UTF-16
+            FileSetAttrib, +N, %progressPath%
+            tips := "创建 [" . progressName . "] 成功"
+            MsgBox, %tips%
+        }
+        else
+        {
+            tips := "配置文件 [" . progressName . "] 已经存在"
+            MsgBox, %tips%
+        }
+    }
+    else
+    {
+        MsgBox, 获取不了当前窗口的ahk_id
+    }
+}
+
+
+
+; 读取Keys配置文件
+ReadKeysFile(){
+    allKeysDirName := "AllKeys"
+    scriptPath:=A_ScriptDir . "\" . allKeysDirName
+    sectionValue:=["FileInfos","Keys"]
+
+    IfExist, %scriptPath%
+    {
+        Loop, %scriptPath%\*.ini
+        {
+            ; 读取每个Keys配置文件
+            _tmpPid := 0
+            for key, keyValue in sectionValue
+            {
+                ReadConfigFile(A_LoopFileFullPath, keyValue)
+            }
+        }
+    }
+}
+
+global _tmpPid := 0
+
+; 读取每个Keys配置文件里的FileInfos和Keys，存入到CKeys中，以PID为键名，Keys为键值
+ReadConfigFile(fileName, sectionValue)
+{
+    IniRead, contentValue, %fileName%, %sectionValue%, ,%A_Space%
+    contentValue:=RegExReplace(contentValue, "m`n)=.*$")
+    keyArr:=StrSplit(contentValue,"`n")
+
+    for keyIndex,key in keyArr
+    {
+        IniRead, value, %fileName%, %sectionValue%, %key%, %A_Space%
+        if (sectionValue == "FileInfos")
+        {
+            ; 以PID为键名，Keys为键值
+            CKeys[value] := {}
+            _tmpPid := value
+        }
+        else if (sectionValue == "Keys")
+        {
+            _clsetsSec := CKeys[_tmpPid]
+            _clsetsSec[key] := value
+        }
+    }
 }
