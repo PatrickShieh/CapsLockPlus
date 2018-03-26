@@ -73,9 +73,8 @@ hideLoading:
 SetTimer, changeLoadingChar, Off
 Gui, LoadingGui:Destroy
 settimer, changeMouseSpeedOnStart, 50 ;暂时修改鼠标速度
-ReloadKeysSet() ; 重新加载keysSet.ini里的设置
 ReadKeysFile() ; 加载本地热键配置
-funcLogic_MonitorProgressChange()
+MonitorProgressChange() ; 启动窗口监听
 return
 
 

@@ -302,7 +302,7 @@ funcLogic_capsLockOpen(){
     return
 }
 
-; 重载程序CapsLock+
+; 重载程序CapsLockPlus
 funcLogic_reload(){
     MsgBox, , , reload, 0.5
     Reload
@@ -750,8 +750,9 @@ funcLogic_HuoYingSecondaryScreen(){
     return
 }
 
-; 监听当前激活的窗口是否改变，是则更换对应当前窗口的热键
-funcLogic_MonitorProgressChange(){
-    MonitorProgressChange()
-    return
-}
+; funcLogic_test(){
+;     ahkPath:=%A_AhkPath%
+;     MsgBox, %ahkPath%
+;     ; FileCreateDir, Path
+;     return
+; }

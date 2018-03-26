@@ -15,26 +15,27 @@ CLSets.QRun=
 */
 settingsInit:
 global settingsModifyTime ;设置文件的修改时间
-global CLSets:={} ;保存Capslock+settings.ini的各种设置
+global CLSets:={} ;保存Capsock+settings.ini的各种设置
+global CLUserKeys:={}
 CLSets.length:={} ;保存settings.ini中每个字段的关键词数量
 
 global CKeys:={} ;保存AllKeys的各种设置
-global CurPID:=0 ; 当前的进程ID
+global CurPName:=0 ; 当前的进程ID
 
 global setsChanges:={} ;保存哪些设置经过改变
 ;set.ini 里面所有字段名，有更新必须修改这里，否则会无法获取
 global iniSections:=["Global","QSearch","QRun","QWeb","TabHotString","QStyle","TTranslate","Keys","Dict"]
-FileGetTime, settingsModifyTime, CapsLock+settings.ini
+FileGetTime, settingsModifyTime, CapsLockPlusSettings.ini
 
-;init CapsLock+settingsDemo.ini and CapsLock+settings.ini
-IfNotExist, CapsLock+settingsDemo.ini
+;init CapsLockPlusSettingsDemo.ini and CapsLockPlusSettings.ini
+IfNotExist, CapsLockPlusSettingsDemo.ini
 {       
-    FileAppend, %lang_settingsIniInit%, CapsLock+settingsDemo.ini, UTF-16
-    FileSetAttrib, +R, CapsLock+settingsDemo.ini
+    FileAppend, %lang_settingsIniInit%, CapsLockPlusSettingsDemo.ini, UTF-16
+    FileSetAttrib, +R, CapsLockPlusSettingsDemo.ini
 }
 else
 {
-    FileGetTime, setDemoModifyTime, CapsLock+settingsDemo.ini
+    FileGetTime, setDemoModifyTime, CapsLockPlusSettingsDemo.ini
     IfExist, language
     {
         FileGetTime, thisScriptModifyTime, language
@@ -47,19 +48,19 @@ else
     thisScriptModifyTime -= setDemoModifyTime, S
     if(thisScriptModifyTime > 0) ;如果主程序文件比较新，那就是更新过，那就覆盖一遍
     {
-        FileSetAttrib, -R, CapsLock+settingsDemo.ini
-        FileDelete, CapsLock+settingsDemo.ini
-        FileAppend, %lang_settingsIniInit%, CapsLock+settingsDemo.ini, UTF-16
-        FileSetAttrib, +R, CapsLock+settingsDemo.ini
+        FileSetAttrib, -R, CapsLockPlusSettingsDemo.ini
+        FileDelete, CapsLockPlusSettingsDemo.ini
+        FileAppend, %lang_settingsIniInit%, CapsLockPlusSettingsDemo.ini, UTF-16
+        FileSetAttrib, +R, CapsLockPlusSettingsDemo.ini
     }
 }
-IfNotExist, CapsLock+settings.ini
+IfNotExist, CapsLockPlusSettings.ini
 {   
-    FileAppend, %lang_settingsUserInit%, CapsLock+settings.ini, UTF-16
+    FileAppend, %lang_settingsUserInit%, CapsLockPlusSettings.ini, UTF-16
 }
 lang_settingsIniInit:=""
 lang_settingsUserInit:=""
-;  IniRead, settingsSections, CapsLock+settings.ini, , , %A_Space%
+;  IniRead, settingsSections, CapsLockPlusSettings.ini, , , %A_Space%
 ;  sectionArr:=StrSplit(settingsSections,"`n")
 for key,sectionValue in iniSections
 {
@@ -69,7 +70,6 @@ for key,sectionValue in iniSections
     setsChanges[sectionValue].appended:={}
     settingsSectionInit(sectionValue)
 }
-
 gosub, keysInit
 SetTimer, globalSettings, -1
 SetTimer, setShortcutKey, -1
@@ -79,11 +79,11 @@ return
 
 ;监控设置文件的修改，并作出改动
 monitorSettingsFile:
-FileGetTime, latestModifyTime, CapsLock+settings.ini
+FileGetTime, latestModifyTime, CapsLockPlusSettings.ini
 if(latestModifyTime!=settingsModifyTime)
 {
     settingsModifyTime:=latestModifyTime
-    ;  IniRead, settingsSections, CapsLock+settings.ini, , , %A_Space%
+    ;  IniRead, settingsSections, CapsLockPlusSettings.ini, , , %A_Space%
     ;  sectionArr:=StrSplit(settingsSections,"`n")
 
     for key,sectionValue in iniSections ;sectionArr
@@ -145,7 +145,7 @@ getShortSetKey(str)
 settingsSectionInit(sectionValue)
 {
     isChange:=0 ;这个字段是否有改动过
-    IniRead, settingsKeys, CapsLock+settings.ini, %sectionValue%, , %A_Space%
+    IniRead, settingsKeys, CapsLockPlusSettings.ini, %sectionValue%, , %A_Space%
     settingsKeys:=RegExReplace(settingsKeys, "m`n)=.*$")
     keyArr:=StrSplit(settingsKeys,"`n")
     
@@ -159,7 +159,7 @@ settingsSectionInit(sectionValue)
         
         for key,keyValue in keyArr
         {
-            IniRead, setValue, CapsLock+settings.ini, %sectionValue%, %keyValue%, %A_Space%
+            IniRead, setValue, CapsLockPlusSettings.ini, %sectionValue%, %keyValue%, %A_Space%
 
             if sectionValue in QSearch,QRun,QWeb  ;如果是这些里面的，用对象来保存，否则直接key=value
             {
@@ -171,12 +171,8 @@ settingsSectionInit(sectionValue)
             }
             else if(sectionValue="Keys")
             {
-                ;如果是 keys 项的值，控制它们的开头必须为 "keyFunc_" ，以避免调用到其他非 keyFunc_ 函数
-                ;同时，也就要求所有按键函数名应该以 "keyFunc_" 开头
-                if(SubStr(setValue,1,8)="keyFunc_")
-                    _clsetsSec[keyValue]:=setValue
-                ;  else
-                ;      _clsetsSec[keyValue]:="keyFunc_" . setValue
+                _clsetsSec[keyValue]:=setValue
+                CLUserKeys[keyValue]:=setValue
             }
             else
             {
@@ -193,7 +189,7 @@ settingsSectionInit(sectionValue)
             for key,value in  _clsetsSec
             {
                 _fullKey:=value.fullKey
-                IniRead, valNew, CapsLock+settings.ini, %sectionValue%, %_fullKey%, %A_Space%
+                IniRead, valNew, CapsLockPlusSettings.ini, %sectionValue%, %_fullKey%, %A_Space%
                 if(valNew="") ;已删除
                 {
                     ;在这里接直接删除CLSets的话，循环的index会被弄乱，跑完for才删除CLSets
@@ -226,7 +222,7 @@ settingsSectionInit(sectionValue)
                 valOld:=_clsetsSec[getShortSetKey(value)].setValue
                 if(!(valOld=0||valOld)) ;如果未声明过的变量， 新添加
                 {
-                    IniRead, valNew, CapsLock+settings.ini, %sectionValue%, %value%, %A_Space%
+                    IniRead, valNew, CapsLockPlusSettings.ini, %sectionValue%, %value%, %A_Space%
                     shortKey:=getShortSetKey(value)
                     _clsetsSec[shortKey]:={}
                     _t:=_clsetsSec[shortKey]
@@ -243,7 +239,7 @@ settingsSectionInit(sectionValue)
         {
             for key,value in  _clsetsSec
             {
-                IniRead, valNew, CapsLock+settings.ini, %sectionValue%, %key%, %A_Space%
+                IniRead, valNew, CapsLockPlusSettings.ini, %sectionValue%, %key%, %A_Space%
                 if(valNew="") ;已删除
                 {
                     ;在这里接直接删除CLSets的话，循环的index会被弄乱，跑完for才删除CLSets
@@ -273,7 +269,7 @@ settingsSectionInit(sectionValue)
                 valOld:=_clsetsSec[value]
                 if(!(valOld=0||valOld)) ;如果未声明过的变量， 新添加
                 {
-                    IniRead, valNew, CapsLock+settings.ini, %sectionValue%, %value%, %A_Space%
+                    IniRead, valNew, CapsLockPlusSettings.ini, %sectionValue%, %value%, %A_Space%
                     _clsetsSec[value]:=valNew
                     CLSets.length[sectionValue]++
                     setsChanges[sectionValue].appended[value]:=valNew
@@ -290,7 +286,7 @@ return isChange
 globalSettings:
 ;  scriptNameNoSuffix:=RegExReplace(A_ScriptName , "i)(\.ahk|\.exe)$")
 ;----------auto start-------------
-autostartLnk:=A_StartupCommon . "\CapsLock+.lnk"
+autostartLnk:=A_StartupCommon . "\CapsLockPlus.lnk"
 if(CLsets.global.autostart) ;如果开启开机自启动
 {
     IfExist, % autostartLnk
@@ -317,9 +313,9 @@ if(CLsets.Global.allowClipboard!="0")
 
 return
 
-; 支持ctrl+alt+Capslock启动capslock+
+; 支持ctrl+alt+Capslock启动CapsLockPlus
 setShortcutKey:
-startMenuLnk:=A_ProgramsCommon . "\CapsLock+.lnk"
+startMenuLnk:=A_ProgramsCommon . "\CapsLockPlus.lnk"
 IfExist, % startMenuLnk
 {
     FileGetShortcut, %startMenuLnk%, lnkTarget

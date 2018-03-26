@@ -3,7 +3,7 @@
 */
 language_Simplified_Chinese:
 ; lib\lib_bindWins.ahk
-global lang_bw_noWIRini:="CapsLock+winsInfosRecorder.ini 不存在"
+global lang_bw_noWIRini:="CapsLockPlusWinsInfosRecorder.ini 不存在"
 
 ; clq.ahk
 global lang_clq_addIni:="确定将以下字符串简写成 {replace0}，并记录到 {replace1}？"
@@ -34,7 +34,7 @@ global lang_settingsUserInit:=""
 lang_settingsUserInit=
 (
 ;------------ Encoding: UTF-16 ------------
-;请对照 CapsLock+settingsDemo.ini 来配置相关设置
+;请对照 CapsLockPlusSettingsDemo.ini 来配置相关设置
 [Global]
 
 loadScript=scriptDemo.js
@@ -60,17 +60,17 @@ global lang_settingsIniInit:=""
 lang_settingsIniInit=
 (
 ;------------ Encoding: UTF-16 ------------
-; #CapsLock+ 设置样本
+; #CapsLockPlus 设置样本
 ; - ******请务必阅读以下说明：******
 
-; - **这里的设置是只读的，仅作说明参考，不要修改这里的设置（修改了也无效），需要自定义设置请在 CapsLock+settings.ini 中的对应段名中作添加修改
-;     例如，需要开启开机自启动，请在 CapsLock+settings.ini 的 [Global] 下添加：autostart=1，并保存
+; - **这里的设置是只读的，仅作说明参考，不要修改这里的设置（修改了也无效），需要自定义设置请在 CapsLockPlusSettings.ini 中的对应段名中作添加修改
+;     例如，需要开启开机自启动，请在 CapsLockPlusSettings.ini 的 [Global] 下添加：autostart=1，并保存
 
 ; - "[]"里面是段名，不能修改
 ; - 各段下所有设置的格式都为：键名=键值，每行一个
 ; - 虽然 QSearch,QRun 和 QWeb 是不同的段，理论上它们的键名可以重复，但请不要这样设置，否则 +Q 的快速启动功能会无法区分
 ; - 分号开头的是注释行，注释行不影响设置，就像这几行
-; - 以下把 Capslock+Q 弹出的输入框称为 "Qbar"
+; - 以下把 CapsLockPlusQ 弹出的输入框称为 "Qbar"
 
 
 ;----------------------------------------------------------------
@@ -79,13 +79,13 @@ lang_settingsIniInit=
 ;是否开机自启动，1为是，0为否（默认）。
 autostart=0
 
-;需要加载的 JavaScript 文件，以逗号分隔，文件应放在与 Capslock+ 程序同文件夹下的 loadScript 文件夹。
-;Capslock+ 将会按照顺序加载，加载完后 +Tab 可以使用里面的函数
-;在本设置不为空时，启动 Capslock+ 时将自动创建 loadScript 文件夹，以及位于文件夹中的 debug.html 和 scriptDemo.js 文件
+;需要加载的 JavaScript 文件，以逗号分隔，文件应放在与 CapsLockPlus 程序同文件夹下的 loadScript 文件夹。
+;CapsLockPlus 将会按照顺序加载，加载完后 +Tab 可以使用里面的函数
+;在本设置不为空时，启动 CapsLockPlus 时将自动创建 loadScript 文件夹，以及位于文件夹中的 debug.html 和 scriptDemo.js 文件
 loadScript=myScript1.js,myScript2.js, myScript3.js , myScript4.js
 
-;按下 Capslock+LAlt 键时，临时改变鼠标速度，范围是1~20。不设置的话默认3
-;可以用 Capslock+LAlt+鼠标滚轮上 / 下快速设置这个值
+;按下 CapsLockPlusLAlt 键时，临时改变鼠标速度，范围是1~20。不设置的话默认3
+;可以用 CapsLockPlusLAlt+鼠标滚轮上 / 下快速设置这个值
 mouseSpeed=3
 
 ;是否允许独立剪贴板功能，1为是（默认），0为否
@@ -98,12 +98,12 @@ loadingAnimation=1
 ; ##Qbar搜索指令设置
 
 ; - 除default外的键名为搜索指令，该指令会按对应的搜索链接搜索关键词，例如：
-;        这里设置了"bd=https://www.baidu.com/s?wd={q}"，可以在 Qbar 输入"bd capslock+"来百度搜索关键词"capslock+"
+;        这里设置了"bd=https://www.baidu.com/s?wd={q}"，可以在 Qbar 输入"bd CapsLockPlus"来百度搜索关键词"CapsLockPlus"
 ;   （不过bd这个指令已经自带，不需要设置，但可以通过将bd设置成别的链接来替换成别的搜索）
 
 ; - default为不输入任何指令时将使用的搜索
 
-; - 键名可以自定义，如果下列例子中键名对应的键值没有被修改，Capslock+将保留相应的搜索指令
+; - 键名可以自定义，如果下列例子中键名对应的键值没有被修改，CapsLockPlus将保留相应的搜索指令
 
 ; - 每个网站的搜索链接（这里的键值）都不一样，可以尝试这样获取（不保证准确）：
 ;    1. 打开需要获取搜索链接的网站
@@ -136,7 +136,7 @@ m=https://developer.mozilla.org/zh-CN/search?q={q}
 
 ; - 选中文件（文件夹）后，按 +Q ，可以将路径填入 Qbar ，那么，你想记录一个文件来快速打开，就可以这么操作：
 ;       1. 选中该文件
-;       2. 按下 Capslock+Q，弹出的输入框内自动填入了该文件的路径
+;       2. 按下 CapsLockPlusQ，弹出的输入框内自动填入了该文件的路径
 ;       3. 在路径的最前面加上"xxx -> "
 ;       4. 按下 Enter 键，确认记录
 
@@ -164,33 +164,33 @@ ie4=*runas "C:\Program Files\Internet Explorer\iexplore.exe" -k
 ; #Qbar 快速打开网页设置
 
 ; - 在这里添加一条设置后，可以在 Qbar 用键名快速打开对应键值设置的链接，例如：
-;        这里设置了"cldocs=http://cjkis.me/capslock+"，在 Qbar 输入"cldocs"，回车后会用默认浏览器打开"http://cjkis.me/capslock+"
+;        这里设置了"cldocs=http://cjkis.me/CapsLockPlus"，在 Qbar 输入"cldocs"，回车后会用默认浏览器打开"http://cjkis.me/CapsLockPlus"
 
-; - 可以通过 Qbar 的 " -> " 指令快速添加一项设置，例如：在 Qbar 输入"cl+ -> http://cjkis.me/capslock+"（" -> "两边各有一个空格），确认后将会在这里添加一项"cl+=http://cjkis.me/capslock+"
+; - 可以通过 Qbar 的 " -> " 指令快速添加一项设置，例如：在 Qbar 输入"cl+ -> http://cjkis.me/CapsLockPlus"（" -> "两边各有一个空格），确认后将会在这里添加一项"cl+=http://cjkis.me/CapsLockPlus"
 
 ; - 如果 " -> " 无法正确识别网址而把设置记录到了[QRun]或[TabHotString]，可以使用 " ->web " 来强制记录到[QWeb]
 
 ; - 选中网址后，按 +Q ，可以将网址填入 Qbar ，那么，你想记录一个网址来快速打开，就可以这么操作：
 ;       1. 选中该网址
-;       2. 按下 Capslock+Q，弹出的输入框内自动填入了该网址
+;       2. 按下 CapsLockPlusQ，弹出的输入框内自动填入了该网址
 ;       3. 在路径的最前面加上"xxx -> "
 ;       4. 按下 Enter 键，确认记录
 
 ; - 可以在键名的右边加上 （0~n个空格）<xxx> 来作为备注提示
 
 [QWeb]
-cldocs=http://cjkis.me/capslock+
+cldocs=http://cjkis.me/CapsLockPlus
 
 
 
 ;----------------------------------------------------------------;
 ; ##TabScript 的字符替换设置
 
-; - Capslock+Tab会将紧靠光标左边的匹配某键名的字符替换成对应键值的字符，例如：
-;        这里设置了"@=capslock-plus@cjkis.me"，在任意地方输入"@"，然后按下"Capslock+Tab"，"@"将替换成"capslock-plus@cjkis.me"
+; - CapsLockPlusTab会将紧靠光标左边的匹配某键名的字符替换成对应键值的字符，例如：
+;        这里设置了"@=capslock-plus@cjkis.me"，在任意地方输入"@"，然后按下"CapsLockPlusTab"，"@"将替换成"capslock-plus@cjkis.me"
 
-; - 这里的优先级高于CapsLock+Tab的计算功能，例如：
-;        这里设置了1+1=3，那么输入1+1后CapsLock+Tab，1+1会被替换成3而不是2
+; - 这里的优先级高于CapsLockPlusTab的计算功能，例如：
+;        这里设置了1+1=3，那么输入1+1后CapsLockPlusTab，1+1会被替换成3而不是2
 
 ; - 可以通过 Qbar 的 " -> " 指令快速添加一项设置，例如：在 Qbar 输入 "tel -> 15012345678" ，确认后将会在这里添加一项 "tel=15012345678"
 
@@ -198,7 +198,7 @@ cldocs=http://cjkis.me/capslock+
 
 ; - 选中文字后，按 +Q ，可以将文字填入 Qbar ，那么，你想记录一段文字，就可以这么操作：
 ;       1. 选中该文字
-;       2. 按下 Capslock+Q，弹出的输入框内自动填入了该文字
+;       2. 按下 CapsLockPlusQ，弹出的输入框内自动填入了该文字
 ;       3. 在路径的最前面加上"xxx -> "
 ;       4. 按下 Enter 键，确认记录
 
@@ -256,7 +256,7 @@ progressColor=0x00cc99
 [TTranslate]
 ;有道api接口
 ;翻译功能通过调用有道的api实现。
-;接口的请求频率限制为每小时1000次，超过限制会被封禁。也就是说所有使用Capslock+翻译的人一小时内翻译的次数加起来不能超过1000次。
+;接口的请求频率限制为每小时1000次，超过限制会被封禁。也就是说所有使用CapsLockPlus翻译的人一小时内翻译的次数加起来不能超过1000次。
 ;有道api网址：http://fanyi.youdao.com/openapi
 
 ;接口类型，0为免费版，1为收费版。通过上面的网址申请的是免费版的，收费版是需要 email 他们来申请的。
@@ -288,10 +288,10 @@ apiKey=0123456789
 
 [Keys]
 
-;Capslock+A -> 光标向左移动一个单词
+;CapsLockPlusA -> 光标向左移动一个单词
 caps_a=keyFunc_moveWordLeft
 
-;Capslock+B -> 光标向下移动 5 行
+;CapsLockPlusB -> 光标向下移动 5 行
 caps_b=keyFunc_moveDown(5)
 
 ;独立剪贴板 1 的复制
@@ -366,10 +366,10 @@ caps_y=keyFunc_moveUp(5)
 ;重复执行撤销以及重做
 caps_z=keyFunc_undoRedo
 
-;Capslock+`（反引号） -> 激活绑定窗口 9 （最多到 20）
+;CapsLockPlus`（反引号） -> 激活绑定窗口 9 （最多到 20）
 caps_backquote=keyFunc_winbind_activate(9)
 
-;Capslock+1~8 -> 激活绑定窗口 1~8
+;CapsLockPlus1~8 -> 激活绑定窗口 1~8
 caps_1=keyFunc_winbind_activate(1)
 
 caps_2=keyFunc_winbind_activate(2)
@@ -392,10 +392,10 @@ caps_9=keyFunc_doubleChar((,))
 ;向上选中 5 行
 caps_0=keyFunc_selectUp(5)
 
-;Capslock+-（减号） -> 向上翻页
+;CapsLockPlus-（减号） -> 向上翻页
 caps_minus=keyFunc_pageUp
 
-;Capslock+=（等号） -> 向下翻页
+;CapsLockPlus=（等号） -> 向下翻页
 caps_equal=keyFunc_pageDown
 
 ;删除光标所在一行
@@ -410,35 +410,35 @@ caps_leftSquareBracket=keyFunc_doubleChar({,})
 ;左右中括号
 caps_rightSquareBracket=keyFunc_doubleChar([,])
 
-;Capslock+\ -> 无
+;CapsLockPlus\ -> 无
 caps_backslash=keyFunc_doNothing
 
-;Capslock+; -> end
+;CapsLockPlus; -> end
 caps_semicolon=keyFunc_end
 
-;Capslock+' -> 左右双引号
+;CapsLockPlus' -> 左右双引号
 caps_quote=keyFunc_keyFunc_doubleChar("""","""")
 
 ;换行——无论光标是否在行末
 caps_enter=keyFunc_enterWherever
 
-;Capslock+, -> 左右尖括号
-;Qbar 激活时 Capslock+, -> 上一层目录
+;CapsLockPlus, -> 左右尖括号
+;Qbar 激活时 CapsLockPlus, -> 上一层目录
 caps_comma=keyFunc_doubleAngle
 
-;Capslock+. -> 输出 .
-;Qbar 激活时 Capslock+. -> 前进一层回退后的目录
+;CapsLockPlus. -> 输出 .
+;Qbar 激活时 CapsLockPlus. -> 前进一层回退后的目录
 caps_dot=keyFunc_send_dot
 
 caps_slash=keyFunc_doNothing
 
-;Capslock+space -> enter
+;CapsLockPlusspace -> enter
 caps_space=keyFunc_enter
 
-;Capslock+RAlt -> 无
+;CapsLockPlusRAlt -> 无
 caps_right_alt=keyFunc_doNothing
 
-;打开 Capslock+ 首页
+;打开 CapsLockPlus 首页
 caps_f1=keyFunc_openCpasDocs
 
 ;打开 mathBoard
@@ -450,7 +450,7 @@ caps_f3=keyFunc_mediaNext
 ;窗口透明；这个功能不能换按键
 caps_f4=keyFunc_winTransparent
 
-;重载 Capslock+
+;重载 CapsLockPlus
 caps_f5=keyFunc_reload
 
 ;让某窗口固定在顶部
@@ -472,7 +472,7 @@ caps_f12=keyFunc_switchClipboard
 
 ;--------------------LAlt--------------------
 
-;Capslock+LAlt+A -> 激活位于当前窗口最左边的窗口
+;CapsLockPlusLAlt+A -> 激活位于当前窗口最左边的窗口
 caps_lalt_a=keyFunc_activateSideWin(fl)
 
 caps_lalt_b=keyFunc_pageMoveLineDown(5)
@@ -535,10 +535,10 @@ caps_lalt_y=keyFunc_pageMoveLineUp(5)
 
 caps_lalt_z=keyFunc_putWinToBottom
 
-;Capslock+LAlt+1: 窗口绑定 9
+;CapsLockPlusLAlt+1: 窗口绑定 9
 caps_lalt_backquote=keyFunc_winbind_binding(9)
 
-;Capslock+LAlt+1: 窗口绑定 1~8
+;CapsLockPlusLAlt+1: 窗口绑定 1~8
 caps_lalt_1=keyFunc_winbind_binding(1)
 
 caps_lalt_2=keyFunc_winbind_binding(2)
@@ -572,10 +572,10 @@ caps_lalt_tab=keyFunc_doNothing
 
 caps_lalt_leftSquareBracket=keyFunc_doNothing
 
-;Capslock+LAlt+]
+;CapsLockPlusLAlt+]
 caps_lalt_rightSquareBracket=keyFunc_doNothing
 
-;Capslock+LAlt+\
+;CapsLockPlusLAlt+\
 caps_lalt_backslash=keyFunc_doNothing
 
 ;清空窗口栈
@@ -645,7 +645,7 @@ global lang_winsInfosRecorderIniInit:=""
 lang_winsInfosRecorderIniInit=
 (
 ;------------ Encoding: UTF-16 ------------
-;我负责记录CapsLock+``和1~8绑定的窗口信息，不要手动修改我，无视我就行了，麻烦帮我点下右上角的"X"，谢谢。
+;我负责记录CapsLockPlus``和1~8绑定的窗口信息，不要手动修改我，无视我就行了，麻烦帮我点下右上角的"X"，谢谢。
 ;我要工作了，麻烦点下右上角的"X"。
 ;我不想再说第三遍了。
 

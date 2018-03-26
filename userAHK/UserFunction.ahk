@@ -1,6 +1,5 @@
+; IDE编辑器里的删除行
 IDEDeleteLine(){
-  MsgBox, 1111
-  return
   SendInput, ^{d}
   return
 }

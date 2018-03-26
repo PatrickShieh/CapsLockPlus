@@ -167,17 +167,15 @@
         }
 
         keyFunc_f7(){
-            funcLogic_MonitorProgressChange()
             return
         }
 
         keyFunc_f8(){
-            CreateKeysFile()
             return
         }
 
         keyFunc_f9(){
-            funcLogic_getMousePosWinTitle()
+            CreateKeysFile()
             return
         }
 
@@ -1009,6 +1007,7 @@
         }
 
         keyFunc_shift_leftButton(){
+            ShowToolTipPanel()
             return
         }
 

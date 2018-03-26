@@ -131,7 +131,7 @@ fixDpi(num)
 ;保存设置到settings.ini
 setSettings(sec,key,val)
 {
-    IniWrite, % val, CapsLock+settings.ini, %sec%, % key
+    IniWrite, % val, CapsLockPlusSettings.ini, %sec%, % key
 }
 
 ;显示一个信息
@@ -390,21 +390,30 @@ ActiveMiniDict(){
 }
 
 GetMousePosWinTitle(){
-    ; MouseGetPos, xpos, ypos 
-    ; Msgbox, The cursor is at X%xpos% Y%ypos%. 
     
-    ; 这里例子允许您移动鼠标来查看
-    ; 鼠标悬停窗口的标题:
-    ; #Persistent
-    ; SetTimer, WatchCursor, 100
-    ; return
-    
-    ; WatchCursor:
+}
+
+; 关闭提示窗口
+ShowToolTipPanel(){
     MouseGetPos, , , id, control
-    WinGetTitle, title, ahk_id %id%
     WinGetClass, class, ahk_id %id%
-    ToolTip, ahk_id %id%`nahk_class %class%`n%title%`nControl: %control%
-    return
+    IfInString, class, tooltip
+    {
+        ToolTip
+        return true
+    }
+    else
+    {
+        MouseGetPos, , , id, control
+        WinGetTitle, title, ahk_id %id%
+        WinGetClass, class, ahk_id %id%
+        WinGet, pid, PID, ahk_id %id%
+        WinGet, processName,ProcessName, ahk_id %id%
+
+        tips := "AhkID：" . id . "`nAhkTitle：" . title . "`nAhkClass：" . class . "`nPID：" . pid . "`nProcessName：" . processName . "`nHWND：" . control
+        ToolTip, %tips%
+    }
+    return false
 }
 
 ; 功能: 切换选中文字大小写
@@ -438,7 +447,7 @@ SwitchSelCase(Mode) {
 	Clipboard := clipBak ; 恢复剪贴板
 }
 
-; 重新加载CapsLock+settings.ini里的Keys键
+; 重新加载CapsLockPlusSettings.ini里的Keys键
 ReloadKeysSet(){
     global
     settingsModifyTime := -1
@@ -511,7 +520,7 @@ PutTheWindowToOtherScreen(){
 ; 监听当前激活的窗口是否改变，是则更换对应当前窗口的热键
 MonitorProgressChange(){
     #Persistent
-    SetTimer, OnPidChange, 250
+    SetTimer, OnPidChange, 500
     return
 
     ; 当进程ID改变时
@@ -519,20 +528,24 @@ MonitorProgressChange(){
     OnPidChange:
     {
         curActiceWinID := WinExist("A")
-        WinGet, tmpPid, PID, ahk_id %curActiceWinID% 
+        WinGet, pName, ProcessName, ahk_id %curActiceWinID% 
 
-        if(tmpPid > 0 && tmpPid != CurPID)
+        if (pName != null && pName != "" && pName != CurPName)
         {
-            CurPID := tmpPid
-            if(CKeys[CurPID] != null && CLSets.Keys != null)
+            CurPName := pName
+            if (CKeys[CurPName] != null && CLSets.Keys != null)
             {
-                For key, value in CKeys[CurPID]
+                For key, value in CKeys[CurPName]
                 {
-                    if(CLSets.Keys[key])
+                    if (CLSets.Keys[key])
                     {
                         CLSets.Keys[key] := value
                     }
                 }
+            }
+            else
+            {
+                gosub, keysResetDefault
             }
         }
         return
@@ -570,9 +583,9 @@ CreateKeysFile()
         IfNotExist %progressPath%
         {
             ; 程序进程ID
-            WinGet, ProgressID, PID, ahk_id %curActiceWinID% 
+            WinGet, pName, ProcessName, ahk_id %curActiceWinID% 
 
-            fileTxt := "[FileInfos]`nProgressID=" . ProgressID . "`n`n[Keys]`n"
+            fileTxt := "[FileInfos]`nProcessName=" . pName . "`n`n[Keys]`n"
 
             FileAppend, %fileTxt%, %progressPath%, UTF-16
             FileSetAttrib, +N, %progressPath%
@@ -604,7 +617,7 @@ ReadKeysFile(){
         Loop, %scriptPath%\*.ini
         {
             ; 读取每个Keys配置文件
-            _tmpPid := 0
+            _tmpPName := 0
             for key, keyValue in sectionValue
             {
                 ReadConfigFile(A_LoopFileFullPath, keyValue)
@@ -613,7 +626,7 @@ ReadKeysFile(){
     }
 }
 
-global _tmpPid := 0
+global _tmpPName := 0
 
 ; 读取每个Keys配置文件里的FileInfos和Keys，存入到CKeys中，以PID为键名，Keys为键值
 ReadConfigFile(fileName, sectionValue)
@@ -629,11 +642,11 @@ ReadConfigFile(fileName, sectionValue)
         {
             ; 以PID为键名，Keys为键值
             CKeys[value] := {}
-            _tmpPid := value
+            _tmpPName := value
         }
         else if (sectionValue == "Keys")
         {
-            _clsetsSec := CKeys[_tmpPid]
+            _clsetsSec := CKeys[_tmpPName]
             _clsetsSec[key] := value
         }
     }

@@ -5,10 +5,10 @@
 ; }
 
 
-IfExist, capslock+icon.ico
+IfExist, CapsLockPlusIcon.ico
 {
 ;freezing icon
-menu, TRAY, Icon, capslock+icon.ico, , 1
+menu, TRAY, Icon, CapsLockPlusIcon.ico, , 1
 }
 Menu, Tray, Icon,,, 1
 
@@ -16,10 +16,10 @@ Menu, Tray, Icon,,, 1
 
 global CLversion:="Version: 2.7.0.0 | 2016-11-30`n`nCopyright 2016 Chen JunKai" 
 
-global cClipboardAll ;capslock+ clipboard
-global caClipboardAll ;capslock+alt clipboard
+global cClipboardAll ;CapsLockPlus clipboard
+global caClipboardAll ;CapsLockPlusalt clipboard
 global sClipboardAll ;system clipboard
-global whichClipboardNow  ;0 system clipboard; 1 capslock+ clipboard; 2 capslock+alt clipboard
+global whichClipboardNow  ;0 system clipboard; 1 CapsLockPlus clipboard; 2 CapsLockPlusalt clipboard
 ;  global clipSaveArr=[]
 allowRunOnClipboardChange:=true
 
@@ -34,7 +34,7 @@ allowRunOnClipboardChange:=true
 ;  #include ..\language\English.ahk
 ; /language
 
-#include lib_settings.ahk ;get the settings from capslock+settings.ini 
+#include lib_settings.ahk ;get the settings from CapsLockPlusSettings.ini 
 #include lib_keysFunction.ahk
 #include lib_keysSet.ahk
 ;  #include lib_ahkExec.ahk
@@ -42,12 +42,12 @@ allowRunOnClipboardChange:=true
 ;  #include lib_fileMethods.ahk
 
 
-#Include lib_clQ.ahk ;capslock+Q
-#Include lib_ydTrans.ahk  ;capslock+T translate
+#Include lib_clQ.ahk ;CapsLockPlusQ
+#Include lib_ydTrans.ahk  ;CapsLockPlusT translate
 #Include lib_clTab.ahk 
 #Include lib_functions.ahk ;public functions
 #Include lib_keysFunLogic.ahk ;public functions logic
-#Include lib_bindWins.ahk ;capslock+` 1~8, windows bind
+#Include lib_bindWins.ahk ;CapsLockPlus` 1~8, windows bind
 #Include lib_winJump.ahk
 #Include lib_winTransparent.ahk
 #Include lib_mouseSpeed.ahk
@@ -57,7 +57,7 @@ allowRunOnClipboardChange:=true
 
 ;change dir
 #include ..\userAHK
-#include *i main.ahk
+#include *i UserKeySet.ahk
 
 #MaxHotkeysPerInterval 500
 #NoEnv
@@ -72,15 +72,15 @@ global ctrlZ, CapsLock2, CapsLock , CapsLockOpen
 CapsLockOpen:=CLSets.Global.CapslockOpen!=""?CLSets.Global.CapslockOpen:true
 
 Capslock::
-;ctrlZ:     Capslock+Z undo / redo flag
+;ctrlZ:     CapsLockPlusZ undo / redo flag
 ;Capslock:  Capslock 键状态标记，按下是1，松开是0
-;Capslock2: 是否使用过 Capslock+ 功能标记，使用过会清除这个变量
+;Capslock2: 是否使用过 CapsLockPlus 功能标记，使用过会清除这个变量
 ctrlZ:=CapsLock2:=CapsLock:=1
 
 SetTimer, setCapsLock2, -300 ; 300ms 犹豫操作时间
 
 KeyWait, Capslock
-CapsLock:="" ;Capslock最优先置空，来关闭 Capslock+ 功能的触发
+CapsLock:="" ;Capslock最优先置空，来关闭 CapsLockPlus 功能的触发
 if CapsLock2
 {
     SetCapsLockState, % GetKeyState("CapsLock","T") ? "Off" : "On"

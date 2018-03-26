@@ -1368,7 +1368,7 @@ appendSet(sec,key,val)
             StringReplace, val, val, \n, \`n, All ;替换换行符
             StringReplace, val, val, `n, \n, All ;有转义符的换回来
         }
-        IniWrite, % val, CapsLock+settings.ini, %sec%, % key
+        IniWrite, % val, CapsLockPlusSettings.ini, %sec%, % key
         MsgBox, , , done, 0.5
     }
     return
@@ -1417,7 +1417,7 @@ qrunBy(_exe, _paramStr:="", ifAdmin:=false)
                 MsgBox, 0x40001, ,%lang_clq_qrunFileNotExist%`n%key%=%t%
                 IfMsgBox, OK
                 {
-                    IniDelete, CapsLock+settings.ini, QRun , %key%
+                    IniDelete, CapsLockPlusSettings.ini, QRun , %key%
                 }
             }
             return true
@@ -1451,7 +1451,7 @@ ButtonSubmit:
         StringReplace, paramStr, inputStr, %strCmd1_2%
         paramStr:=trim(paramStr)
         
-        IfExist, CapsLock+settings.ini
+        IfExist, CapsLockPlusSettings.ini
         {
             if (RegExMatch(cmd2, "->(.*)", match)) 
             {
@@ -1528,11 +1528,11 @@ ButtonSubmit:
 
             if(paramStr="set"||paramStr="settings")
             { 
-                IfExist, CapsLock+settingsDemo.ini
-                    Run, CapsLock+settingsDemo.ini
+                IfExist, CapsLockPlusSettingsDemo.ini
+                    Run, CapsLockPlusSettingsDemo.ini
                 
-                IfExist, CapsLock+settings.ini
-                    Run, CapsLock+settings.ini
+                IfExist, CapsLockPlusSettings.ini
+                    Run, CapsLockPlusSettings.ini
                 
                 return
             }
@@ -1560,7 +1560,7 @@ ButtonSubmit:
         ; --LEVEL 1 END--cl command--
         
         ; --LEVEL 2 START--
-        ;-------------------------------CapsLock+settings.ini--------------
+        ;-------------------------------CapsLockPlusSettings.ini--------------
         for key, value in CLSets["QSearch"]
         {
             if((cmd1==key)&&(cmd1!="default")) ;default是用在没有cmd1时用的，排除掉

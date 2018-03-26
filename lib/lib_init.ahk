@@ -6,8 +6,8 @@ return
 initAll:
 Suspend, On ;挂起所有热键
 
-IniRead, loadingAnimation, CapsLock+settings.ini, Global, loadingAnimation, 1
-IniRead, language, CapsLock+settings.ini, Global, language, 0
+IniRead, loadingAnimation, CapsLockPlusSettings.ini, Global, loadingAnimation, 1
+IniRead, language, CapsLockPlusSettings.ini, Global, language, 0
 
 if(loadingAnimation != "0")
 	gosub, showLoading
