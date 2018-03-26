@@ -5,9 +5,10 @@
 
 ## 2.概述 ##
 &emsp;&emsp;CapslockPlus是一个加强 Capslock 键的功能，以提高效率的工具。让你拥有更多的组合键，例如：
-> CapsLock + 全键<br/>
-> CapsLock + Alt + 全键<br/>
-> CapsLock + Shift + 全键<br/>
-> CapsLock + Ctrl + 全键<br/>
+
+- CapsLock + 全键
+- CapsLock + Alt + 全键
+- CapsLock + Shift + 全键
+- CapsLock + Ctrl + 全键
 
 ## 3.与原版区别 ##
