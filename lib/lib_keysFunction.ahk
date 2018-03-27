@@ -442,12 +442,10 @@
         }
 
         keyFunc_alt_q(){
-            funcLogic_CloseTranslate()
             return
         }
 
         keyFunc_alt_r(){
-            funcLogic_tabNext()
             return
         }
 
@@ -713,7 +711,6 @@
         }
 
         keyFunc_shift_b(){
-            MsgBox, 哈哈
             return
         }
 

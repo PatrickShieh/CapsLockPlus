@@ -26,11 +26,62 @@ QBar                | <font color="#00dd00">✔</font>     | <font color="#dd000
 TransplatePanel     | <font color="#00dd00">✔</font>     | <font color="#00dd00">✔</font>
 DCWK                | <font color="#dd0000">✘</font>     | <font color="#00dd00">✔</font>
 
-## 4.Caps + Key ##
->以下省略了CapsLock键，默认是要加上的，✘：表示未设置功能键，可自行设置
+## 4.Caps + Key 按键说明 ##
+>以下省略了CapsLock键，默认是要加上的，灰色表示未设置功能键，可自行设置
+>
+![](https://i.imgur.com/4EFSmEQ.png)
 
-![](https://i.imgur.com/OpTAo8J.png)
+    CapsLock + 鼠标
 
-![](https://i.imgur.com/pQUQHEJ.png)
+按键| 功能说明
+:-:| :-:
+鼠标左键|✘
+鼠标中键|✘
+鼠标右键|✘
+鼠标滚轮向前|音量加
+鼠标滚轮向后|音量减
 
-## 5.Caps + Alt + Key ##
+## 5.Caps + Alt + Key 按键说明 ##
+>以下省略了CapsLock键，默认是要加上的，灰色表示未设置功能键，可自行设置
+>
+![](https://i.imgur.com/xtDCxCr.png)
+
+    CapsLock + Alt + 鼠标
+
+按键| 功能说明
+:-:| :-:
+鼠标左键|双显示器有效，将当前软件移动到另外显示器
+鼠标中键|记录当前鼠标灵敏度(Dpi)
+鼠标右键|✘
+鼠标滚轮向前|鼠标灵敏度(Dpi)增加
+鼠标滚轮向后|鼠标灵敏度(Dpi)减少
+
+## 6.Caps + Shift + Key 按键说明 ##
+>以下省略了CapsLock键，默认是要加上的，灰色表示未设置功能键，可自行设置
+>
+![](https://i.imgur.com/MOVBJjD.png)
+
+    CapsLock + Shift + 鼠标
+
+按键| 功能说明
+:-:| :-:
+鼠标左键|显示/关闭 AutohotKey窗口信息
+鼠标中键|✘
+鼠标右键|✘
+鼠标滚轮向前|✘
+鼠标滚轮向后|✘
+
+## 7.Caps + Ctrl + Key 按键说明 ##
+>以下省略了CapsLock键，默认是要加上的，灰色表示未设置功能键，可自行设置
+>
+![](https://i.imgur.com/4RUEasF.png)
+
+    CapsLock + Ctrl + 鼠标
+
+按键| 功能说明
+:-:| :-:
+鼠标左键|✘
+鼠标中键|记录当前鼠标灵敏度(Dpi)
+鼠标右键|✘
+鼠标滚轮向前|✘
+鼠标滚轮向后|✘
