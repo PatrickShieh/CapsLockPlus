@@ -12,3 +12,19 @@
 - CapsLock + Ctrl + 全键
 
 ## 3.与原版区别 ##
+>CapsLock按键省略为Caps，Key为各种按键，下面对比的是大功能模块，后面再详细介绍各种小功能。
+
+功能| CapsLock+（原版） | CapsLockPlus（新版） 
+:-:                 | :-:   | :-: 
+Caps + Key          | <font color="#00dd00">✔</font>     | <font color="#00dd00">✔</font>
+Caps + Alt + Key    | <font color="#00dd00">✔</font>     | <font color="#00dd00">✔</font>
+Caps + Shift + Key  | <font color="#dd0000">✘</font>     | <font color="#00dd00">✔</font>
+Caps + Ctrl + Key   | <font color="#dd0000">✘</font>     | <font color="#00dd00">✔</font>
+TabScript           | <font color="#00dd00">✔</font>     | <font color="#00dd00">✔</font>
+WinBind             | <font color="#00dd00">✔</font>     | <font color="#00dd00">✔</font>
+QBar                | <font color="#00dd00">✔</font>     | <font color="#dd0000">✘</font>
+TransplatePanel     | <font color="#00dd00">✔</font>     | <font color="#00dd00">✔</font>
+DCWK                | <font color="#dd0000">✘</font>     | <font color="#00dd00">✔</font>
+
+## 4.Caps + Key ##
+#### i.与原版区别 ####
