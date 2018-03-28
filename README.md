@@ -14,7 +14,7 @@
 - CapsLock + Ctrl + 全键
 
 ## 与原版区别 ##
->CapsLock按键省略为Caps，Key为各种按键，下面对比的是大功能模块，后面再详细介绍各种小功能。
+>CapsLock按键省略为Caps，Key为各种按键，下面对比的是大功能模块，后面再详细介绍各种小功能，QBar，QWeb，QSearch不太喜欢，所以没加上，但是原来的代码还在，想要的话自己改下。
 
 功能| CapsLock+（原版） | CapsLockPlus（新版） 
 :-:                 | :-:   | :-: 
