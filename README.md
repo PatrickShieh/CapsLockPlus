@@ -28,11 +28,10 @@ QBar                | <font color="#00dd00">✔</font>     | <font color="#dd000
 TransplatePanel     | <font color="#00dd00">✔</font>     | <font color="#00dd00">✔</font>
 DAAS                | <font color="#dd0000">✘</font>     | <font color="#00dd00">✔</font>
 
-##目录结构
 
 
 ## 按键说明 ##
-####1.Caps + Key
+#### 1.Caps + Key ####
 >以下省略了CapsLock键，默认是要加上的，灰色表示未设置功能键，可自行设置
 >
 ![](https://i.imgur.com/4EFSmEQ.png)
@@ -47,7 +46,7 @@ DAAS                | <font color="#dd0000">✘</font>     | <font color="#00dd0
 鼠标滚轮向前|音量加
 鼠标滚轮向后|音量减
 
-####2.Caps + Alt + Key
+#### 2.Caps + Alt + Key
 >以下省略了CapsLock键，默认是要加上的，灰色表示未设置功能键，可自行设置
 >
 ![](https://i.imgur.com/xtDCxCr.png)
@@ -62,7 +61,7 @@ DAAS                | <font color="#dd0000">✘</font>     | <font color="#00dd0
 鼠标滚轮向前|鼠标灵敏度(Dpi)增加
 鼠标滚轮向后|鼠标灵敏度(Dpi)减少
 
-####3.Caps + Shift + Key
+#### 3.Caps + Shift + Key
 >以下省略了CapsLock键，默认是要加上的，灰色表示未设置功能键，可自行设置
 >
 ![](https://i.imgur.com/MOVBJjD.png)
@@ -77,7 +76,7 @@ DAAS                | <font color="#dd0000">✘</font>     | <font color="#00dd0
 鼠标滚轮向前|✘
 鼠标滚轮向后|✘
 
-####4.Caps + Ctrl + Key
+#### 4.Caps + Ctrl + Key
 >以下省略了CapsLock键，默认是要加上的，灰色表示未设置功能键，可自行设置
 >
 ![](https://i.imgur.com/4RUEasF.png)
@@ -93,16 +92,16 @@ DAAS                | <font color="#dd0000">✘</font>     | <font color="#00dd0
 鼠标滚轮向后|✘
 
 ## TabSnippet 热字符串 ##
-####按键
-    <b style="font-size:1.2rem;">CapsLock + Tab<b/>
+#### 按键
+    CapsLock + Tab
 
-####说明
+#### 说明
 >举个例子，在CapsLockPlusSettings.ini文件的[TabHotString]段下有这么一条设置：email=123456789@abc.com，那么在任意能输入文字的地方输入：asdfghjklemail，按下Capslock+Tab，就会变成asdfghjkl123456789@abc.com，有点像IDE的代码段功能
 
 ## WinBind ##
 
-####如何绑定
-    <b style="font-size:1.2rem;">绑定窗口:CapsLock + Alt + (`或1~9)<b/>
+#### 如何绑定
+    绑定窗口:CapsLock + Alt + (`或1~9)
     
 >关于绑定:原版有3种模式，此版本有4模式，多了1种，下面做介绍：
 <ul>
@@ -112,37 +111,37 @@ DAAS                | <font color="#dd0000">✘</font>     | <font color="#00dd0
   <li>模式4：四击，绑定当前激活的窗口，与相应按键并列窗口，即同时打开同时隐藏；</li>
 </ul>
 
-####如何激活
-    <b style="font-size:1.2rem;">激活窗口:CapsLock + (`或1~9)<b/>
+#### 如何激活
+    激活窗口:CapsLock + (`或1~9)
 >激活/最小化绑定在该按键的窗口
 
-####说明
+#### 说明
     关于绑定
->1.模式1和模式3会覆盖当前按键上已有的绑定窗口;
->2.模式2绑定在按键现有模式是模式1或模式2时会追加窗口，是模式3时不追加，而会覆盖原绑定设置，绑定当前激活窗口（与模式1效果一样）;
->3.模式2操作示例：
->&emsp;a.窗口A处于最前的情况下，依次按下CapslockAlt不放，再按两次1；
->&emsp;b.激活窗口B，同样操作；
->&emsp;c.激活窗口C，同样操作；
->&emsp;d.按下Capslock不放，（多次）按下1来在A,B,C三个窗口之间实现类似Alt+Tab的窗口切换。
->4.模式3只要在需要绑定的程序的其中一个窗口做类似模式2的操作（需要三击）即可绑定该程序所有窗口（包括绑定操作过后才打开的）。
->5.模式2原有的绑定窗口被关闭至只剩下1个窗口时，将自动转换成模式1绑定（可以激活 / 最小化窗口）
->6.模式4只有在模式1，2和4情况下才有效。
+>1.模式1和模式3会覆盖当前按键上已有的绑定窗口;<br/>
+>2.模式2绑定在按键现有模式是模式1或模式2时会追加窗口，是模式3时不追加，而会覆盖原绑定设置，绑定当前激活窗口（与模式1效果一样）;<br/>
+>3.模式2操作示例：<br/>
+>&emsp;a.窗口A处于最前的情况下，依次按下CapslockAlt不放，再按两次1；<br/>
+>&emsp;b.激活窗口B，同样操作；<br/>
+>&emsp;c.激活窗口C，同样操作；<br/>
+>&emsp;d.按下Capslock不放，（多次）按下1来在A,B,C三个窗口之间实现类似Alt+Tab的窗口切换。<br/>
+>4.模式3只要在需要绑定的程序的其中一个窗口做类似模式2的操作（需要三击）即可绑定该程序所有窗口（包括绑定操作过后才打开的）。<br/>
+>5.模式2原有的绑定窗口被关闭至只剩下1个窗口时，将自动转换成模式1绑定（可以激活 / 最小化窗口）<br/>
+>6.模式4只有在模式1，2和4情况下才有效。<br/>
 
     关于窗口激活/最小化
->1.模式1下，在原窗口不存在时，激活动作会自动绑定窗口所属程序的另一个窗口;
->2.模式1和模式3下，在原绑定窗口所属程序未启动时，激活动作将启动该程序;
->3.模式2和模式3下，多窗口中，最近使用本功能激活的窗口在下次使用本功能时会优先激活;
->4.绑定的窗口只有一个时，模式1和模式3会激活 / 最小化该窗口，模式2会自动转换成模式1;
->5.模式4，窗口A、B、C和D绑定按键1，当激活按键1时，窗口A、B、C和D同时激活;
+>1.模式1下，在原窗口不存在时，激活动作会自动绑定窗口所属程序的另一个窗口;<br/>
+>2.模式1和模式3下，在原绑定窗口所属程序未启动时，激活动作将启动该程序;<br/>
+>3.模式2和模式3下，多窗口中，最近使用本功能激活的窗口在下次使用本功能时会优先激活;<br/>
+>4.绑定的窗口只有一个时，模式1和模式3会激活 / 最小化该窗口，模式2会自动转换成模式1;<br/>
+>5.模式4，窗口A、B、C和D绑定按键1，当激活按键1时，窗口A、B、C和D同时激活;<br/>
 
 ## DAAS ##
-    <b style="font-size:1.2rem;">生成应用快捷键配置文件 CapsLock + F9<b/>
-####说明
+    生成应用快捷键配置文件 CapsLock + F9
+#### 说明
 >DAAS:动态适配应用快捷键(Dynamic Adaptation Application Shortcuts)，假如说对应用A配置快捷键Caps+A，对应用B配置快捷键Caps+A，当处于应用A下则执行应用A的快捷键，处于应用B则执行应用B的快捷键，当既不处于应用A，也不处于应用B的情况下，则执行默认的快捷键.
 
-####配置软件快捷键
->a.打开应用A，在应用A下执行CapsLock+F9，成功时会弹窗提示配置成功。
->b.到根目录下找到AllKeys文件夹，这里存放所有应用的配置文件，此时找到对应的配置文件，例如A.ini。
->c.[FileInfos]下的内容切勿修改，在[Keys]下添加相应的快捷键配置即可，例:
->&emsp;i.找到同级目录下的userAHK文件夹，可在UserKeySet里设置功能函数，如函数名userKeyFunc_IDEDeleteLine，然后回到你的应用配置文件里，在[Keys]下添加，caps_d=userKeyFunc_IDEDeleteLine保存即可，Caps+F11重启。
+#### 配置软件快捷键
+>a.打开应用A，在应用A下执行CapsLock+F9，成功时会弹窗提示配置成功。<br/>
+>b.到根目录下找到AllKeys文件夹，这里存放所有应用的配置文件，此时找到对应的配置文件，例如A.ini。<br/>
+>c.[FileInfos]下的内容切勿修改，在[Keys]下添加相应的快捷键配置即可，例:<br/>
+>&emsp;&emsp;找到同级目录下的userAHK文件夹，可在UserKeySet里设置功能函数，如函数名userKeyFunc_IDEDeleteLine，然后回到你的应用配置文件里，在[Keys]下添加，caps_d=userKeyFunc_IDEDeleteLine保存即可，Caps+F11重启。
