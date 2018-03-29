@@ -145,3 +145,7 @@ DAAS                | <font color="#dd0000">✘</font>     | <font color="#00dd0
 >b.到根目录下找到AllKeys文件夹，这里存放所有应用的配置文件，此时找到对应的配置文件，例如A.ini。<br/>
 >c.[FileInfos]下的内容切勿修改，在[Keys]下添加相应的快捷键配置即可，例:<br/>
 >&emsp;&emsp;找到同级目录下的userAHK文件夹，可在UserKeySet里设置功能函数，如函数名userKeyFunc_IDEDeleteLine，然后回到你的应用配置文件里，在[Keys]下添加，caps_d=userKeyFunc_IDEDeleteLine保存即可，Caps+F11重启。
+
+
+## 如何自行设置全局的按键
+>在CapsLockPlusSettings.ini里[Keys]设置，请对照 CapsLockPlussettingsDemo.ini 来配置相关设置，里面说的很详细

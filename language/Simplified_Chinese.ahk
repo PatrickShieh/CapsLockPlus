@@ -39,21 +39,11 @@ lang_settingsUserInit=
 
 loadScript=scriptDemo.js
 
-[QSearch]
-
-[QRun]
-
-[QWeb]
-
 [TabHotString]
-
-[QStyle]
 
 [TTranslate]
 
 [Keys]
-
-[Dict]
 
 )
 global lang_settingsIniInit:=""
@@ -68,9 +58,7 @@ lang_settingsIniInit=
 
 ; - "[]"里面是段名，不能修改
 ; - 各段下所有设置的格式都为：键名=键值，每行一个
-; - 虽然 QSearch,QRun 和 QWeb 是不同的段，理论上它们的键名可以重复，但请不要这样设置，否则 +Q 的快速启动功能会无法区分
 ; - 分号开头的是注释行，注释行不影响设置，就像这几行
-; - 以下把 CapsLockPlusQ 弹出的输入框称为 "Qbar"
 
 
 ;----------------------------------------------------------------
@@ -94,107 +82,11 @@ allowClipboard=1
 ;是否开启程序加载动画，1是（默认），0否
 loadingAnimation=1
 
-;----------------------------------------------------------------
-; ##Qbar搜索指令设置
-
-; - 除default外的键名为搜索指令，该指令会按对应的搜索链接搜索关键词，例如：
-;        这里设置了"bd=https://www.baidu.com/s?wd={q}"，可以在 Qbar 输入"bd CapsLockPlus"来百度搜索关键词"CapsLockPlus"
-;   （不过bd这个指令已经自带，不需要设置，但可以通过将bd设置成别的链接来替换成别的搜索）
-
-; - default为不输入任何指令时将使用的搜索
-
-; - 键名可以自定义，如果下列例子中键名对应的键值没有被修改，CapsLockPlus将保留相应的搜索指令
-
-; - 每个网站的搜索链接（这里的键值）都不一样，可以尝试这样获取（不保证准确）：
-;    1. 打开需要获取搜索链接的网站
-;    2. 在搜索栏输入任意字符，例如"capslockplus"，搜索（有没有搜索出结果无所谓）
-;    3. 在跳转后的地址栏中找到刚刚输入的字符，找到刚才搜索的字符并替换成"{q}"（不包括引号），得到搜索链接（替换后地址栏上的所有字符）
-
-; - 可以使用 " ->search " 来添加一条设置到[QSearch]
-
-; - 可以在键名的右边加上 （0~n个空格）<xxx> 来作为备注提示
-
-[QSearch]
-
-default=https://www.baidu.com/s?wd={q}
-bd=https://www.baidu.com/s?wd={q}
-g   <google>=https://www.google.com/search?q={q}
-tb  <taobao>=http://s.taobao.com/search?q={q}
-wk=https://zh.wikipedia.org/w/index.php?search={q}
-m=https://developer.mozilla.org/zh-CN/search?q={q}
-
-
-;----------------------------------------------------------------
-; ##Qbar 快速打开文件（文件夹）设置
-
-; - 在这里添加一条设置后，就可以在 Qbar 用键名快速打开对应键值设置的文件或文件夹，例如：
-;        这里设置了"exp=E:\expFolder\example.exe"，在 Qbar 输入"exp"，回车后会打开"E:\expFolder\example.exe"这个文件
-
-; - 可以通过 Qbar 的 " -> " 指令快速添加一项设置，例如：在 Qbar 输入"exp2 -> E:\expFolder2\example2.exe"（" -> "两边各有一个空格），确认后将会在这里添加一项"exp2=E:\expFolder2\example2.exe"
-
-; - 如果 " -> " 无法正确识别文件路径而把设置记录到了[QWeb]或[TabHotString]，可以使用 " ->run " 来强制记录到[QRun]
-
-; - 选中文件（文件夹）后，按 +Q ，可以将路径填入 Qbar ，那么，你想记录一个文件来快速打开，就可以这么操作：
-;       1. 选中该文件
-;       2. 按下 CapsLockPlusQ，弹出的输入框内自动填入了该文件的路径
-;       3. 在路径的最前面加上"xxx -> "
-;       4. 按下 Enter 键，确认记录
-
-; - 可以在键名的右边加上 （0~n个空格）<xxx> 来作为备注提示
-
-; - 可以设置以管理员启动程序，以及启动程序的参数，
-;   需要设置的话程序路径需要用 " （引号）引起来，左边加上 *RunAs 将用管理员权限启动，右边带上启动参数
-
-[QRun]
-;一般状态
-ie1=C:\Program Files\Internet Explorer\iexplore.exe
-
-;管理员权限打开
-ie2=*runas "C:\Program Files\Internet Explorer\iexplore.exe"
-
-;全屏打开
-ie3 <full screen>="C:\Program Files\Internet Explorer\iexplore.exe" -k
-
-;管理员权限，全屏打开
-ie4=*runas "C:\Program Files\Internet Explorer\iexplore.exe" -k
-
-
-
-;----------------------------------------------------------------
-; #Qbar 快速打开网页设置
-
-; - 在这里添加一条设置后，可以在 Qbar 用键名快速打开对应键值设置的链接，例如：
-;        这里设置了"cldocs=http://cjkis.me/CapsLockPlus"，在 Qbar 输入"cldocs"，回车后会用默认浏览器打开"http://cjkis.me/CapsLockPlus"
-
-; - 可以通过 Qbar 的 " -> " 指令快速添加一项设置，例如：在 Qbar 输入"cl+ -> http://cjkis.me/CapsLockPlus"（" -> "两边各有一个空格），确认后将会在这里添加一项"cl+=http://cjkis.me/CapsLockPlus"
-
-; - 如果 " -> " 无法正确识别网址而把设置记录到了[QRun]或[TabHotString]，可以使用 " ->web " 来强制记录到[QWeb]
-
-; - 选中网址后，按 +Q ，可以将网址填入 Qbar ，那么，你想记录一个网址来快速打开，就可以这么操作：
-;       1. 选中该网址
-;       2. 按下 CapsLockPlusQ，弹出的输入框内自动填入了该网址
-;       3. 在路径的最前面加上"xxx -> "
-;       4. 按下 Enter 键，确认记录
-
-; - 可以在键名的右边加上 （0~n个空格）<xxx> 来作为备注提示
-
-[QWeb]
-cldocs=http://cjkis.me/CapsLockPlus
-
-
-
 ;----------------------------------------------------------------;
 ; ##TabScript 的字符替换设置
 
 ; - CapsLockPlusTab会将紧靠光标左边的匹配某键名的字符替换成对应键值的字符，例如：
 ;        这里设置了"@=capslock-plus@cjkis.me"，在任意地方输入"@"，然后按下"CapsLockPlusTab"，"@"将替换成"capslock-plus@cjkis.me"
-
-; - 这里的优先级高于CapsLockPlusTab的计算功能，例如：
-;        这里设置了1+1=3，那么输入1+1后CapsLockPlusTab，1+1会被替换成3而不是2
-
-; - 可以通过 Qbar 的 " -> " 指令快速添加一项设置，例如：在 Qbar 输入 "tel -> 15012345678" ，确认后将会在这里添加一项 "tel=15012345678"
-
-; - 如果作为键值的字符串是类似网址或文件（夹）路径的格式，例如："ccc -> com.com.com"， " -> " 指令很可能会将它判定为网址或文件（夹）而把设置记录到了[QRun]或[QWeb]，可以使用 " ->str " 来强制记录到[TabHotString]
 
 ; - 选中文字后，按 +Q ，可以将文字填入 Qbar ，那么，你想记录一段文字，就可以这么操作：
 ;       1. 选中该文字
@@ -205,50 +97,6 @@ cldocs=http://cjkis.me/CapsLockPlus
 [TabHotString]
 clp=capslockplus
 
-;----------------------------------------------------------------
-; ##Qbar 的样式设置
-
-[QStyle]
-;边框颜色
-;指定16种HTML基础颜色之一或6位的RGB颜色值(0x前缀可以省略)。例如：red、ffffaa、FFFFAA、0xFFFFAA。下面的颜色设置也一样。
-borderBackgroundColor=red
-
-;边框四角的圆角程度，0为直角
-borderRadius=9
-
-;文字输入框背景颜色
-textBackgroundColor=green
-
-;输入文字颜色
-textColor=ffffff
-
-;输入文字字体
-;editFontName=Consolas bold
-editFontName=Hiragino Sans GB W6
-
-;输入文字大小
-editFontSize=12
-
-;提示列表字体
-listFontName=consolas
-
-;提示列表字体大小
-listFontSize=10
-
-;提示列表背景颜色
-listBackgroundColor=blue
-
-;提示列表文字颜色
-listColor=0x000000
-
-;提示列表行数
-listCount=5
-
-;提示列表每行高度
-lineHeight=19
-
-;进度条颜色
-progressColor=0x00cc99
 
 ;----------------------------------------------------------------;
 ; ##+T翻译设置
@@ -289,6 +137,7 @@ apiKey=0123456789
 [Keys]
 
 ;CapsLockPlusA -> 光标向左移动一个单词
+;keyFunc_moveWordLeft函数名可在UserKeySet里设置，再在这里调用
 caps_a=keyFunc_moveWordLeft
 
 
