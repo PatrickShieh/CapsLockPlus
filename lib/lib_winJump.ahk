@@ -1,4 +1,4 @@
-activateSideWin(UDLR){
+﻿activateSideWin(UDLR){
     global winJumpSelected, winJumpIgnoreCount
     _sensitivity := Ceil(20/96*A_ScreenDPI) ; 灵敏度，每隔多少像素点检测一次，高分屏按dpi等比增加扫描间隔
     _deskTopExtra := 0 ; 在桌面中的话，增大移动距离

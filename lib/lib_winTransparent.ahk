@@ -1,4 +1,4 @@
-winTransparentInit:
+﻿winTransparentInit:
 global winTranSetting, transpWinId, allowWinTranspToggle, transp
 
 ; 窗口透明度

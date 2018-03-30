@@ -1,4 +1,4 @@
-/*
+﻿/*
 计算板
 */
 keyFunc_mathBoard(){

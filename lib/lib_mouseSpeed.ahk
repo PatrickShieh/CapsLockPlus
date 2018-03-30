@@ -1,4 +1,4 @@
-mouseSpeedInit:
+﻿mouseSpeedInit:
 global mouseSpeed,OrigMouseSpeed,SPI_GETMOUSESPEED,SPI_SETMOUSESPEED
 SPI_GETMOUSESPEED = 0x70
 SPI_SETMOUSESPEED = 0x71

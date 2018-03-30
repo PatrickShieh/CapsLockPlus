@@ -1,4 +1,4 @@
-; Backspace
+﻿; Backspace
 funcLogic_backspace(){
     SendInput,{BackSpace}
     Return
