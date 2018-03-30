@@ -587,7 +587,7 @@ CreateKeysFile()
 
             fileTxt := "[FileInfos]`nProcessName=" . pName . "`n`n[Keys]`n"
 
-            FileAppend, %fileTxt%, %progressPath%, UTF-16
+            FileAppend, %fileTxt%, %progressPath%, UTF-8
             FileSetAttrib, +N, %progressPath%
             tips := "创建 [" . progressName . "] 成功"
             MsgBox, %tips%
