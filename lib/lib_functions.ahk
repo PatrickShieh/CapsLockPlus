@@ -535,6 +535,7 @@ MonitorProgressChange(){
             CurPName := pName
             if (CKeys[CurPName] != null && CLSets.Keys != null)
             {
+                test:=CKeys[CurPName]
                 For key, value in CKeys[CurPName]
                 {
                     if (CLSets.Keys[key])
@@ -585,7 +586,7 @@ CreateKeysFile()
             ; 程序进程ID
             WinGet, pName, ProcessName, ahk_id %curActiceWinID% 
 
-            fileTxt := "[FileInfos]`nProcessName=" . pName . "`n`n[Keys]`n"
+            fileTxt := "`n[FileInfos]`nProcessName=" . pName . "`n`n[Keys]`n"
 
             FileAppend, %fileTxt%, %progressPath%, UTF-8
             FileSetAttrib, +N, %progressPath%
@@ -626,12 +627,13 @@ ReadKeysFile(){
     }
 }
 
-global _tmpPName := 0
+global _tmpPName := null
 
 ; 读取每个Keys配置文件里的FileInfos和Keys，存入到CKeys中，以PID为键名，Keys为键值
 ReadConfigFile(fileName, sectionValue)
 {
     IniRead, contentValue, %fileName%, %sectionValue%, ,%A_Space%
+    
     contentValue:=RegExReplace(contentValue, "m`n)=.*$")
     keyArr:=StrSplit(contentValue,"`n")
 
@@ -646,6 +648,7 @@ ReadConfigFile(fileName, sectionValue)
         }
         else if (sectionValue == "Keys")
         {
+            tips1:="Key:" . _tmpPName . "`nValue:" . value
             _clsetsSec := CKeys[_tmpPName]
             _clsetsSec[key] := value
         }
